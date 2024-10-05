@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>MoneyCrates</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .floating-image {
+      animation: float 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <header class="flex fixed justify-between items-center p-6 fixed top-0 left-0 w-full z-10">
+    <div class="flex items-center space-x-2">
+      <span class="text-2xl font-bold title">MCS</span>
+    </div>
+    <nav class="flex items-center space-x-4">
+      <button class="button-primary font-semibold py-2 px-4 rounded-full">Get Started</button>
+    </nav>
+  </header>
+  
+  <main>
+    <section class="hero-section relative flex items-center justify-center min-h-screen">
+      <div class="absolute left-10 top-1/2 transform -translate-y-1/2">
+        <img src="https://static01.nyt.com/images/2021/09/12/business/00soros-01/00soros-01-articleLarge.jpg?quality=75&auto=webp&disable=upscale" alt="George Soros" class="rounded-full w-24 h-24 object-cover shadow-lg floating-image">
+      </div>
+      <div class="text-center max-w-4xl px-4">
+        <h1 class="title text-5xl md:text-6xl lg:text-7xl leading-tight mb-6">
+          Navigating the world
+          <br/>
+          of finance
+          <span class="highlight">Together</span>
+        </h1>
+        <p class="mt-6 text-lg md:text-xl max-w-2xl mx-auto">
+          <span class="font-bold">Discover</span>
+          valuable resources and insights that will help you take control of your financial future and achieve your goals.
+        </p>
+        <button class="mt-10 button-primary font-semibold py-3 px-6 rounded-full text-lg">
+          Let's go MoneyCrates
+        </button>
+      </div>
+      <div class="absolute right-10 top-1/3 transform -translate-y-1/2">
+        <img src="https://content.time.com/time/daily/2012/1201/360_sl_buffett_0111.jpg" alt="Warren Buffett" class="rounded-full w-24 h-24 object-cover shadow-lg floating-image">
+      </div>
+    </section>
+    
+    <section id="about" class="about-section mb-20">
+      <div class="container mx-auto px-4 py-20 flex items-center h-full">
+        <div class="w-1/2">
+          <h1 class="text-4xl font-bold title mb-4">
+            Your All-in-One
+            <br/>
+            Financial Powerhouse
+          </h1>
+          <p class="text-lg mb-4">
+            MoneyCrates brings together cutting-edge tools and insights to empower your financial journey:
+          </p>
+          <ul class="list-disc list-inside mb-4">
+            <li>Expert-curated blogs on financial strategies</li>
+            <li>Real-time market news to keep you informed</li>
+            <li>Advanced stock screener for smart investment choices</li>
+            <li>AI-powered financial advisor for personalized guidance</li>
+          </ul>
+          <p class="text-lg">
+            Whether you're a seasoned investor or just starting out, MoneyCrates provides the resources you need to make informed decisions and grow your wealth.
+          </p>
+        </div>
+        <div class="w-1/2">
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+  {
+  "exchanges": [],
+  "dataSource": "SPX500",
+  "grouping": "sector",
+  "blockSize": "market_cap_basic",
+  "blockColor": "change",
+  "locale": "en",
+  "symbolUrl": "",
+  "colorTheme": "light",
+  "hasTopBar": false,
+  "isDataSetEnabled": false,
+  "isZoomEnabled": true,
+  "hasSymbolTooltip": true,
+  "isMonoSize": false,
+  "width": 400,
+  "height": 400
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+        </div>
+      </div>
+    </section>
+    <section id="features" class="py-20 mb-20 ">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold title mb-4">
+            Powerful Tools
+            <span class="relative">
+              <span class="highlight">at Your Fingertips</span>
+              <span class="absolute bottom-0 left-0 w-full h-3 bg-yellow-300 opacity-50"></span>
+            </span>
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-4">
+            Unlock your financial potential with our comprehensive suite of investment tools.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <a href="#curated-blogs" class="group">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="bg-blue-100 p-3 rounded-lg group-hover:shadow-lg transition-all duration-300">
+                  <i class="fas fa-blog text-blue-500 text-2xl group-hover:animate-pulse"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold title">Curated Financial Insights</h3>
+                <p class="mt-2">Access a wealth of expert-curated articles on cutting-edge financial strategies to enhance your investment knowledge.</p>
+              </div>
+            </div>
+          </a>
+          <a href="#market-news" class="group">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="bg-green-100 p-3 rounded-lg group-hover:shadow-lg transition-all duration-300">
+                  <i class="fas fa-newspaper text-green-500 text-2xl group-hover:animate-pulse"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold title">Live Market Updates</h3>
+                <p class="mt-2">Stay ahead of market trends with our real-time news feed, delivering crucial financial information as it happens.</p>
+              </div>
+            </div>
+          </a>
+          <a href="#stock-screener" class="group">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="bg-purple-100 p-3 rounded-lg group-hover:shadow-lg transition-all duration-300">
+                  <i class="fas fa-filter text-purple-500 text-2xl group-hover:animate-pulse"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold title">Powerful Stock Screening</h3>
+                <p class="mt-2">Utilize our advanced stock screener to identify promising investment opportunities tailored to your specific criteria.</p>
+              </div>
+            </div>
+          </a>
+          <a href="#ai-advisor" class="group">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="bg-red-100 p-3 rounded-lg group-hover:shadow-lg transition-all duration-300">
+                  <i class="fas fa-robot text-red-500 text-2xl group-hover:animate-pulse"></i>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold title">AI-Driven Financial Guidance</h3>
+                <p class="mt-2">Receive personalized investment advice powered by artificial intelligence, tailored to your unique financial goals.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <style>
+      .tradingview-widget-container {
+        transform: skew(0deg, -2deg);
+        overflow: hidden; /* This ensures content doesn't overflow due to skew */
+      }
+      .tradingview-widget-container > div {
+        transform: skew(0deg, 2deg); /* This counter-skews the content to keep it straight */
+      }
+    </style>
+    
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container mb-20">
+      <div class="tradingview-widget-container__widget"></div>
+      <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+      "symbols": [
+        {
+          "proName": "FOREXCOM:SPXUSD",
+          "title": "S&P 500 Index"
+        },
+        {
+          "proName": "FOREXCOM:NSXUSD",
+          "title": "US 100 Cash CFD"
+        },
+        {
+          "proName": "FX_IDC:EURUSD",
+          "title": "EUR to USD"
+        },
+        {
+          "proName": "BITSTAMP:BTCUSD",
+          "title": "Bitcoin"
+        },
+        {
+          "proName": "BITSTAMP:ETHUSD",
+          "title": "Ethereum"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:NVDA"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:TSLA"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:AAPL"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:AMZN"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:SMCI"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:MSFT"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:AMD"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:COIN"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:MSTR"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:NFLX"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:INTC"
+        },
+        {
+          "description": "",
+          "proName": "NYSE:GME"
+        },
+        {
+          "description": "",
+          "proName": "NASDAQ:PYPL"
+        }
+      ],
+      "showSymbolLogo": true,
+      "isTransparent": false,
+      "displayMode": "regular",
+      "colorTheme": "light",
+      "locale": "en"
+    }
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+    <section id="quote" class="py-20 ">
+      <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center">
+        <div class="w-full md:w-1/2 mb-8 md:mb-0">
+          <img alt="Black and white portrait of Warren Buffett" class="w-full rounded-lg shadow-lg" src="https://images.barrons.com/im-133706?width=639&height=426" width="500" height="500"/>
+        </div>
+        <div class="w-full md:w-1/2 md:ml-12">
+          <blockquote class="text-2xl font-serif italic mb-6">
+            "If you don't find a way to make money while you sleep, you will work until you die."
+          </blockquote>
+          <p class="text-xl font-semibold text-right">- Warren Buffett</p>
+          <p class="mt-6 text-lg">
+            At MoneyCrates, we believe in empowering you to make your money work for you. Our tools and insights are designed to help you build a portfolio that generates income, even while you sleep.
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer class="py-8 border-t border-gray-300 ">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-sm text-gray-600 mb-4 md:mb-0 font-inter">&copy; 2024 MoneyCrates. All rights reserved.</p>
+          <ul class="flex space-x-6">
+            <li><a href="#about" class="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-300 font-inter">About Us</a></li>
+            <li><a href="#features" class="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-300 font-inter">Features</a></li>
+            <li><a href="#contact" class="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-300 font-inter">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
