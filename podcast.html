@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link  rel="stylesheet" href="style.css">
+
+    <title>MoneyCrates | Podcast</title>
+</head>
+<body>
+    <section id="podcasts" class="py-20 bg-[#F5F5DC]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold title mb-4 text-center">
+              Financial Insights
+              <span class="relative">
+                <span class="highlight">on Air</span>
+                <span class="absolute bottom-0 left-0 w-full h-3 bg-yellow-300 opacity-50"></span>
+              </span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-4">
+              Tune into expert discussions and market analyses with our curated selection of finance podcasts.
+            </p>
+          </div>
+      
+          <div id="podcast-list" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Podcast cards will be dynamically inserted here -->
+          </div>
+      
+          <div id="loading" class="text-center mt-8">
+            <p class="text-lg">Loading podcasts...</p>
+          </div>
+        </div>
+      </section>
+      
+      <script>
+        const token = 'BQBmi02HjSp74_aoiZ0ASSXtvFJare6v_tU9Uz06QXQrUhG_2SA295duKUyf2EmYmv3iNQJEyOzd7zh8ooSEHFxwi5KHKgjQxQ_gZvb2gi7sxSik_oxn6RVS9adxjT1JbjgZBkxxrD-51AJrflbJwQ8_BH-ewyzw2jJtnycSjzCqaHpsVco0clCLpjT1VdVKHrrUe2i3TPBI_Vo3Z8gre1EzpFfFAngBQg_4Ic8VmzKlWS6mh1WR9YkIsmogRbQzsQTTCcFTnWJc7D-Kdr5vQKToh0k_7UvV';
+      
+        async function fetchWebApi(endpoint, method, body) {
+          const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            method,
+            body: JSON.stringify(body)
+          });
+          return await res.json();
+        }
+      
+        async function searchPodcasts(query) {
+          return (await fetchWebApi(
+            `v1/search?q=${encodeURIComponent(query)}&type=show&market=US&limit=10`, 'GET'
+          )).shows.items;
+        }
+      
+        async function getPodcastEpisodes(showId) {
+          return (await fetchWebApi(
+            `v1/shows/${showId}/episodes?market=US&limit=3`, 'GET'
+          )).items;
+        }
+      
+        function createPodcastCard(podcast, episodes) {
+          return `
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="${podcast.images[0].url}" alt="${podcast.name}" class="w-full h-48 object-cover">
+              <div class="p-6">
+                <h3 class="text-xl font-bold title mb-2">${podcast.name}</h3>
+                <p class="text-sm text-gray-600 mb-4">${podcast.publisher}</p>
+                <p class="mb-4 text-gray-700">${podcast.description.slice(0, 100)}...</p>
+                <h4 class="font-semibold mb-2 text-gray-800">Latest Episodes:</h4>
+                <ul class="space-y-2">
+                  ${episodes.map(episode => `
+                    <li>
+                      <a href="${episode.external_urls.spotify}" target="_blank" class="text-blue-600 hover:underline">
+                        ${episode.name}
+                      </a>
+                    </li>
+                  `).join('')}
+                </ul>
+                <a href="${podcast.external_urls.spotify}" target="_blank" class="mt-4 inline-block bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded-full hover:bg-yellow-500 transition duration-300">
+                  Listen on Spotify
+                </a>
+              </div>
+            </div>
+          `;
+        }
+      
+        async function displayPodcasts() {
+          const loadingElement = document.getElementById('loading');
+          const podcastList = document.getElementById('podcast-list');
+          
+          try {
+            const podcastQuery = "finance investing";
+            const podcasts = await searchPodcasts(podcastQuery);
+            
+            for (const podcast of podcasts) {
+              const episodes = await getPodcastEpisodes(podcast.id);
+              podcastList.innerHTML += createPodcastCard(podcast, episodes);
+            }
+          } catch (error) {
+            console.error("Error fetching podcasts:", error);
+            podcastList.innerHTML = '<p class="text-red-500">Error loading podcasts. Please try again later.</p>';
+          } finally {
+            loadingElement.style.display = 'none';
+          }
+        }
+      
+        // Call this function to display podcasts when the page loads
+        displayPodcasts();
+      </script>
+</body>
+</html>
