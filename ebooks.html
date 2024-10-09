@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>MoneyCrates</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="flex fixed justify-between items-center p-6 fixed top-0 left-0 w-full z-10 ">
+    <div class="flex items-center space-x-2">
+      <span class="text-2xl font-bold title">MoneyCrates</span>
+    </div>
+    <nav class="flex items-center space-x-4">
+      <button class="button-primary font-semibold py-2 px-4 rounded-full">Get Started</button>
+    </nav>
+  </header>
+  
+  <main>
+    <section class="hero-section flex items-center justify-center min-h-screen ">
+      <div class="text-center max-w-4xl px-4">
+        <h1 class="title text-5xl md:text-6xl lg:text-7xl leading-tight mb-6">
+          Master the Art of <br/>
+          <span class="highlight">Financial Success</span>
+        </h1>
+        <p class="mt-6 text-lg md:text-xl max-w-2xl mx-auto">
+          <span class="font-bold">Empower yourself</span> with our curated collection of the best finance books. From investment strategies to building wealth, gain the knowledge to achieve financial freedom.
+        </p>
+        <button class="mt-10 button-primary font-semibold py-3 px-6 rounded-full text-lg">
+          Start Your Journey
+        </button>
+      </div>
+    </section>
+
+    <section class="books-section py-16">
+      <h2 class="text-4xl text-center title mb-10">Editor's Choice: Top 20 Finance Books</h2>
+      <div id="books-container" class="books-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 md:px-12">
+        <!-- Book cards will be dynamically inserted here -->
+      </div>
+    </section>
+  </main>
+
+  <script>
+    async function fetchBooks() {
+      const searchTerms = ['finance', 'investment', 'stock market', 'wealth'];
+      const container = document.getElementById('books-container');
+      container.innerHTML = '';
+
+      try {
+        const responses = await Promise.all(searchTerms.map(term =>
+          fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(term)}&limit=2`)
+        ));
+
+        const booksData = await Promise.all(responses.map(res => res.json()));
+        let totalBooks = 0;
+
+        booksData.forEach(data => {
+          data.docs.forEach(book => {
+            if (totalBooks < 20) {
+              const bookCard = document.createElement('div');
+              bookCard.className = 'book-card bg-white rounded-lg shadow-lg p-4 transition-transform duration-200 ease-in-out transform hover:-translate-y-2';
+
+              const coverId = book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg` : 'https://via.placeholder.com/150';
+              const title = book.title || 'No title available';
+              const author = book.author_name ? book.author_name.join(', ') : 'Unknown author';
+              const publishDate = book.first_publish_year || 'N/A';
+              const description = book.subject ? book.subject.slice(0, 3).join(', ') : 'No description available';
+
+              bookCard.innerHTML = `
+                <img class="book-image rounded-md w-full h-48 object-cover mb-4" src="${coverId}" alt="${title}">
+                <h2 class="book-title text-lg font-semibold mb-2">${title}</h2>
+                <p class="book-author text-sm text-gray-600 mb-2">by ${author} (${publishDate})</p>
+                <p class="book-summary text-sm text-gray-800">${description}</p>
+                <a class="button-primary mt-4 block text-center font-semibold py-2 px-4 rounded bg-yellow-400 text-gray-900 hover:bg-yellow-500 transition-colors" href="https://openlibrary.org${book.key}" target="_blank">
+                  Learn More
+                </a>
+              `;
+              container.appendChild(bookCard);
+              totalBooks++;
+            }
+          });
+        });
+      } catch (error) {
+        container.innerHTML = '<p class="error text-center text-red-500">Failed to fetch books. Please try again later.</p>';
+        console.error('Error fetching books:', error);
+      }
+    }
+
+    fetchBooks();
+  </script>
+</body>
+</html>
